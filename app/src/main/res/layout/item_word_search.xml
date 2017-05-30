@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp12"
+    style="@style/DefaultClickable"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/word"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:textSize="@dimen/sp16"
+        android:text="good"/>
+
+    <TextView
+        android:id="@+id/base_explain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:layout_marginTop="@dimen/dp3"
+        android:textSize="@dimen/sp12"
+        android:textColor="@android:color/darker_gray"
+        android:text="adj.好的, 优秀的, 有益的, 漂亮的，健全的n.好处，利益, 善良, 善行, 好人adv.同well"/>
+
+</LinearLayout>

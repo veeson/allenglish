@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lws.allenglish">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <application
+        android:name=".base.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.activities.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activities.SearchWordActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.activities.WordDetailsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activities.BlankActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activities.BookmarkActivity"
+            android:label="@string/bookmark"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activities.TranslationRecordDetailsActivity"
+            android:label="@string/text_and_result" />
+        <activity
+            android:name=".ui.activities.LeaningEnglishActivity"
+            android:label="@string/learning_english" />
+        <activity android:name=".ui.activities.ReaderActivity" />
+        <activity android:name=".ui.activities.VOAActivity" />
+        <activity
+            android:name=".ui.activities.VideoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name=".ui.activities.ComprehensionEnglishActivity" />
+        <activity
+            android:name=".ui.activities.ComprehensionActivity"
+            android:label="@string/comprehension" />
+        <activity
+            android:name=".ui.activities.CompositionActivity"
+            android:label="@string/composition" />
+        <activity
+            android:name=".ui.activities.WordActivity"
+            android:label="@string/word" />
+        <activity
+            android:name=".ui.activities.DictionaryActivity"
+            android:label="@string/dictionary" />
+    </application>
+
+</manifest>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F5F5F5"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/learning_english"
+        style="@style/DefaultClickable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp6"
+        android:drawableLeft="@drawable/ic_learning_english"
+        android:drawablePadding="@dimen/dp12"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dp3"
+        android:text="@string/learning_english"
+        android:textColor="#424242"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/word"
+        style="@style/DefaultClickable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp6"
+        android:drawableLeft="@drawable/ic_voa"
+        android:drawablePadding="@dimen/dp12"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dp3"
+        android:text="单词学习"
+        android:textColor="#424242"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/composition"
+        style="@style/DefaultClickable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp6"
+        android:drawableLeft="@drawable/ic_composition"
+        android:drawablePadding="@dimen/dp12"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dp3"
+        android:text="作文学习"
+        android:textColor="#424242"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/comprehension"
+        style="@style/DefaultClickable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp6"
+        android:drawableLeft="@drawable/ic_comprehension"
+        android:drawablePadding="@dimen/dp12"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dp3"
+        android:text="听力学习"
+        android:textColor="#424242"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/bookmark"
+        style="@style/DefaultClickable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp6"
+        android:drawableLeft="@drawable/ic_bookmark"
+        android:drawablePadding="@dimen/dp12"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dp3"
+        android:text="@string/bookmark"
+        android:textColor="#424242"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/dictionary"
+        style="@style/DefaultClickable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp6"
+        android:drawableLeft="@drawable/ic_xinhua_dictionary"
+        android:drawablePadding="@dimen/dp12"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dp3"
+        android:text="字典词典"
+        android:textColor="#424242"
+        android:textSize="18sp" />
+
+</LinearLayout>
+

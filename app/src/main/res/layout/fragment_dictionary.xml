@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp6"
+        android:orientation="vertical"
+        android:padding="@dimen/dp6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/word"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:padding="@dimen/dp6"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/sp16" />
+
+            <ImageView
+                android:id="@+id/clear"
+                style="@style/DefaultClickable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_fork" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/query"
+            style="@style/btn_round_rect_solid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp6"
+            android:text="查询"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/dp6"
+        android:layout_marginRight="@dimen/dp6">
+
+        <ImageView
+            android:id="@+id/copy"
+            style="@style/DefaultClickable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp12"
+            android:src="@drawable/ic_action_copy" />
+
+        <ImageView
+            android:id="@+id/share"
+            style="@style/DefaultClickable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_share" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dictionary_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp6"
+        android:lineSpacingMultiplier="1.2"
+        android:textSize="@dimen/sp16" />
+
+</LinearLayout>

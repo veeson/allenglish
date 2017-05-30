@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="2dp"
+        app:cardMaxElevation="8dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/dp6"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/translation_source"
+                    style="@style/DefaultClickable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/ic_action_triangle"
+                    android:gravity="center_vertical"
+                    android:text="百度翻译"
+                    android:textColor="@color/app_color"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/translate"
+                    style="@style/DefaultClickable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:drawableRight="@drawable/ic_action_arrow_right"
+                    android:gravity="center"
+                    android:text="翻译"
+                    android:textColor="@color/app_color"
+                    android:textSize="@dimen/sp16" />
+            </LinearLayout>
+
+            <View style="@style/HorizontalDivider" />
+
+            <EditText
+                android:id="@+id/input_translation_text"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/dp6"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="top"
+                android:lineSpacingExtra="10sp"
+                android:lineSpacingMultiplier="0.6"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/sp16"
+                android:hint="@string/input_translation_text_tip" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp6"
+                android:layout_marginLeft="@dimen/dp6"
+                android:layout_marginRight="@dimen/dp6"
+                android:gravity="end">
+
+                <ImageView
+                    android:id="@+id/clear_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp6"
+                    android:background="@drawable/rectangle_shape"
+                    android:src="@drawable/ic_action_fork_white" />
+
+                <ImageView
+                    android:id="@+id/load_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_shape"
+                    android:src="@drawable/ic_action_file" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="2dp"
+        app:cardMaxElevation="8dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp6"
+                android:layout_marginRight="@dimen/dp6"
+                android:layout_marginTop="@dimen/dp6"
+                android:text="译文"
+                android:textSize="@dimen/sp16"
+                android:textColor="@color/app_color" />
+
+            <TextView
+                android:id="@+id/translation_result"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/dp6"
+                android:layout_weight="1"
+                android:lineSpacingExtra="10sp"
+                android:lineSpacingMultiplier="0.6"
+                android:scrollbars="vertical"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/sp16" />
+
+            <View style="@style/HorizontalDivider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/read"
+                    style="@style/DefaultClickable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_action_volume_up_color" />
+
+                <ImageView
+                    android:id="@+id/copy"
+                    style="@style/DefaultClickable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_action_copy" />
+
+                <ImageView
+                    android:id="@+id/share"
+                    style="@style/DefaultClickable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_action_share" />
+
+                <ImageView
+                    android:id="@+id/expand"
+                    style="@style/DefaultClickable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_action_arrow_expand" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
+

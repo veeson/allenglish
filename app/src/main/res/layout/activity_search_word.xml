@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_search_word"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp72"
+        android:background="@color/app_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp8"
+            android:background="@drawable/bg_search_word_rounded"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/back"
+                style="@style/DefaultClickable"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/dp12"
+                android:paddingRight="@dimen/dp12"
+                android:src="@drawable/ic_action_left_arrow" />
+
+
+            <EditText
+                android:id="@+id/input_word"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:background="@drawable/bg_search_word_rounded"
+                android:hint="@string/input_word_hint"
+                android:textColor="@color/app_color"
+                android:textCursorDrawable="@null" />
+
+            <ImageView
+                android:id="@+id/clear"
+                style="@style/DefaultClickable"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/dp12"
+                android:paddingRight="@dimen/dp12"
+                android:visibility="invisible"
+                android:src="@drawable/ic_action_fork" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/word_matching"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" />
+
+</LinearLayout>

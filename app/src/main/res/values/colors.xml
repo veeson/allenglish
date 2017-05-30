@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="app_color">#006064</color>
+    <color name="bottom_tab_text_color_normal">#999999</color>
+    <color name="bottom_tab_text_color_selected">#3F51B5</color>
+    <color name="press_grey">#f0f0f0</color>
+    <color name="icon_press_selected">#00838F</color>
+    <color name="press_white">#ffffff</color>
+    <color name="icon_press_normal">@color/app_color</color>
+    <color name="light_grey">#e6e6e6</color>
+    <color name="text_color">#616161</color>
+    <color name="bg_tab_layout">#E0E0E0</color>
+    <color name="test">#673AB7</color>
+</resources>

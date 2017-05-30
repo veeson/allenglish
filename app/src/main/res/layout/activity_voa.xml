@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_reader"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_color"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp12"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/news_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp12"
+                    android:text="中国央行注入流动性缓解信贷紧缩"
+                    android:textColor="#37474F"
+                    android:textSize="@dimen/sp26" />
+
+                <TextView
+                    android:id="@+id/source_and_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp6"
+                    android:text="可可英语   2016-12-19"
+                    android:textColor="@color/app_color"
+                    android:textSize="@dimen/sp16" />
+
+                <View style="@style/HorizontalDivider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:gravity="center"
+                    android:padding="@dimen/dp6"
+                    android:background="@drawable/bg_player_layout"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/player_control"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/selector_player" />
+
+                    <SeekBar
+                        android:id="@+id/audio_seek_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/news_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:lineSpacingMultiplier="1.1"
+                    android:text="Despite the PBoC's injections, some analysts say it cannot fully counteract the effect of capital outflows.
+
+尽管中国央行注入了流动性，但有些分析师表示，这无法完全消除资本外流的影响。"
+                    android:textColor="#424242"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/related_recommendation_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp6"
+                    android:layout_marginLeft="@dimen/dp12"
+                    android:layout_marginRight="@dimen/dp12"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:text="相关推荐"
+                    android:textColor="@color/app_color"
+                    android:textSize="@dimen/sp16" />
+
+                <View style="@style/HorizontalDivider" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/related_recommendation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

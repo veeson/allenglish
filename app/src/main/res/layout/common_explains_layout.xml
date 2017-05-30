@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp6"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/explain_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp6"
+            android:text="基本释义"
+            android:textColor="@color/app_color" />
+
+        <View style="@style/HorizontalDivider" />
+
+        <LinearLayout
+            android:id="@+id/base_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp6"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/symbols"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingMultiplier="1.2"
+                android:text="adj.好的, 优秀的, 有益的, 漂亮的，健全的
+n.好处，利益, 善良, 善行, 好人
+adv.同well" />
+
+            <TextView
+                android:id="@+id/exchange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp6"
+                android:lineSpacingMultiplier="1.2"
+                android:text="比较级：better   最高级：best   复数：goods"
+                android:textColor="@android:color/darker_gray" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/sentence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp6" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

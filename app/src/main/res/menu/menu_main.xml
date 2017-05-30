@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_action_search"
+        android:orderInCategory="80"
+        android:title="@string/search"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_bookmark"
+        android:icon="@drawable/ic_action_bookmark"
+        android:orderInCategory="90"
+        android:title="@string/bookmark"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:title="@string/app_about"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_praise"
+        android:orderInCategory="100"
+        android:title="@string/app_praise"
+        app:showAsAction="never" />
+
+</menu>
