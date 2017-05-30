@@ -123,6 +123,11 @@ public class ReaderActivity extends AppCompatActivity {
                 mNestedScrollView.scrollTo(0, 0);
                 fetchReaderFromInternet(mDataSheet, resultsEntity.createdAt, resultsEntity.tag);
             }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
         });
         mRecyclerView.setAdapter(mAdapter);
     }

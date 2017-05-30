@@ -75,6 +75,10 @@ public class SearchWordActivity extends AppCompatActivity {
                 intent.putExtra(AppConstants.BASE_INFO, baseWord);
                 startActivity(intent);
             }
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
         });
         mRecyclerView.setAdapter(mAdapter);
     }

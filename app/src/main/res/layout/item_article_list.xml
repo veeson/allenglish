@@ -25,8 +25,9 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:lineSpacingMultiplier="1.2"
-                android:lines="2"
+                android:maxLines="2"
                 android:text="北京发布空气污染红色警报，工厂停工、学校停课，雾霾弥漫好似“寂静岭”！"
                 android:textColor="@color/app_color"
                 android:textSize="@dimen/sp16" />

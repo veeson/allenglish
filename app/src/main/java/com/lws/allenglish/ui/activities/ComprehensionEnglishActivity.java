@@ -180,6 +180,11 @@ public class ComprehensionEnglishActivity extends AppCompatActivity implements M
                 mNestedScrollView.scrollTo(0, 0);
                 fetchVOAAudioFromInternet(mResultsEntity.postTime.iso, mResultsEntity.tag);
             }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
         });
         mRecyclerView.setAdapter(mAdapter);
     }

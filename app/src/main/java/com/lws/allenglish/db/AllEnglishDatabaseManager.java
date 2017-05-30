@@ -81,13 +81,17 @@ public class AllEnglishDatabaseManager {
     }
 
     /**
-     * 取消某个单词的收藏
-     *
-     * @param word
-     * @return
+     * 取消某个收藏的单词
      */
     public void cancelCollectedWord(@NonNull String word) {
         mSqLiteDatabase.delete("WordCollection", "word = ?", new String[]{word});
+    }
+
+    /**
+     * 取消所有收藏的单词
+     */
+    public void cancelAllCollectedWords() {
+        mSqLiteDatabase.delete("WordCollection", null, null);
     }
 
     public List<BaseWord> loadCollectedWords() {
@@ -127,6 +131,22 @@ public class AllEnglishDatabaseManager {
         }
         closeCursor(cursor);
         return list;
+    }
+
+    /**
+     * 删除一条翻译记录
+     *
+     * @param translationRecord
+     */
+    public void deleteTranslationRecord(@NonNull TranslationRecord translationRecord) {
+        mSqLiteDatabase.delete("TranslationRecord", "text = ? and source = ?", new String[]{translationRecord.text, translationRecord.source});
+    }
+
+    /**
+     * 删除所有翻译记录
+     */
+    public void deleteAllTranslationRecords() {
+        mSqLiteDatabase.delete("TranslationRecord", null, null);
     }
 
     /**
@@ -212,6 +232,7 @@ public class AllEnglishDatabaseManager {
     private void closeCursor(Cursor cursor) {
         if (!cursor.isClosed()) {
             cursor.close();
+            cursor = null;
         }
     }
 }

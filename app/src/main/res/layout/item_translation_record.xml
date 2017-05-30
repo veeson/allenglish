@@ -16,13 +16,24 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text"
+            android:id="@+id/original_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:lineSpacingMultiplier="1.2"
-            android:maxLines="3"
+            android:maxLines="2"
             android:text="这是一段测试文本这是一段测试文本这是一段测试文本这是一段测试文本这是一段测试文本这是一段测试文本这是一段测试文本这是一段测试文本这是一段测试文本这是一段测试文本这是一段测试文本这是一段测试文本这是一段测试文本这是一段测试文本这是一段测试文本"
-            android:textSize="@dimen/sp16" />
+            android:textColor="@color/text_color" />
+
+        <TextView
+            android:id="@+id/translation_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp4"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="1.2"
+            android:maxLines="2"
+            android:text="This is a test this is a test text text text this is a test this is a test this is a test text text text this is a test this is a test this is a test text text text this is a test this is a test that is a section of text this text test is a test text this is a text test this is a test this is a test text text" />
 
         <TextView
             android:id="@+id/date_and_source"

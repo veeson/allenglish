@@ -21,11 +21,11 @@ import butterknife.ButterKnife;
  */
 
 public class TranslationRecordAdapter extends RecyclerView.Adapter<TranslationRecordAdapter.ViewHolder> {
-    private List<TranslationRecord> list;
+    private List<TranslationRecord> mList;
     private OnItemClickListener mOnItemClickListener;
 
-    public TranslationRecordAdapter(List<TranslationRecord> list) {
-        this.list = list;
+    public TranslationRecordAdapter(List<TranslationRecord> mList) {
+        this.mList = mList;
     }
 
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
@@ -41,8 +41,9 @@ public class TranslationRecordAdapter extends RecyclerView.Adapter<TranslationRe
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.text.setText(list.get(position).text);
-        holder.dateAndSource.setText(new StringBuilder().append(list.get(position).date).append(" (").append(list.get(position).source).append(")"));
+        holder.originalText.setText(mList.get(position).text);
+        holder.translationText.setText(mList.get(position).result);
+        holder.dateAndSource.setText(new StringBuilder().append(mList.get(position).date).append(" (").append(mList.get(position).source).append(")"));
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,16 +51,27 @@ public class TranslationRecordAdapter extends RecyclerView.Adapter<TranslationRe
                 mOnItemClickListener.onItemClick(holder.itemView, pos);
             }
         });
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                int pos = holder.getLayoutPosition();
+                mOnItemClickListener.onItemLongClick(holder.itemView, pos);
+                return false;
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return mList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.text)
-        TextView text;
+        @BindView(R.id.original_text)
+        TextView originalText;
+        @BindView(R.id.translation_text)
+        TextView translationText;
         @BindView(R.id.date_and_source)
         TextView dateAndSource;
         @BindView(R.id.card_view)

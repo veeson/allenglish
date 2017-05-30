@@ -51,6 +51,15 @@ public class WordCollectionAdapter extends RecyclerView.Adapter<WordCollectionAd
                 mOnItemClickListener.onItemClick(holder.itemView, pos);
             }
         });
+
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                int pos = holder.getLayoutPosition();
+                mOnItemClickListener.onItemLongClick(holder.itemView, pos);
+                return false;
+            }
+        });
     }
 
     @Override

@@ -192,6 +192,11 @@ public class ReaderFragment extends BaseFragment {
                 }
                 startActivity(intent);
             }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
         });
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

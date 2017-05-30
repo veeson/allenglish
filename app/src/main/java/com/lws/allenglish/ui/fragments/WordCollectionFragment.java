@@ -12,10 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.lws.allenglish.AppConstants;
 import com.lws.allenglish.R;
 import com.lws.allenglish.adapter.WordCollectionAdapter;
-import com.lws.allenglish.base.BaseFragment;
 import com.lws.allenglish.bean.BaseWord;
 import com.lws.allenglish.connector.OnItemClickListener;
 import com.lws.allenglish.db.AllEnglishDatabaseManager;
@@ -36,7 +36,6 @@ public class WordCollectionFragment extends Fragment {
     @BindView(R.id.word_collection)
     RecyclerView mRecyclerView;
 
-//    private static final String TAG = "WordCollectionFragment";
     private Context mContext;
     private WordCollectionAdapter mAdapter;
     private AllEnglishDatabaseManager mDatabaseManager;
@@ -56,8 +55,6 @@ public class WordCollectionFragment extends Fragment {
         mDatabaseManager = AllEnglishDatabaseManager.getInstance(mContext);
         initRecyclerView();
         new LoadWordCollectionTask().execute();
-//        mIsPrepared = true;
-//        lazyLoad();
         return view;
     }
 
@@ -74,8 +71,41 @@ public class WordCollectionFragment extends Fragment {
                 intent.putExtra(AppConstants.BASE_INFO, baseWord);
                 startActivity(intent);
             }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                showDeleteOption(position);
+            }
         });
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void showDeleteOption(final int position) {
+        new MaterialDialog.Builder(mContext)
+                .items(R.array.delete_option)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    BookmarkActivity activity = (BookmarkActivity) getActivity();
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        switch (which) {
+                            case 0:
+                                mDatabaseManager.cancelCollectedWord(mList.get(position).word);
+                                mList.remove(position);
+                                mAdapter.notifyItemRemoved(position);
+                                activity.mAdapter.refreshPagerTitle(0, "生词本(" + mList.size() + ")");
+                                break;
+                            case 1:
+                                mDatabaseManager.cancelAllCollectedWords();
+                                mList.clear();
+                                mAdapter.notifyDataSetChanged();
+                                activity.mAdapter.refreshPagerTitle(0, "生词本(" + mList.size() + ")");
+                                break;
+                        }
+                    }
+                })
+                .contentColor(getResources().getColor(android.R.color.darker_gray))
+                .backgroundColor(getResources().getColor(android.R.color.white))
+                .show();
     }
 
     private void onRefreshComplete() {
@@ -99,16 +129,6 @@ public class WordCollectionFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             onRefreshComplete();
-//            mHasLoadedOnce = true;
         }
-
     }
-
-//    @Override
-//    protected void lazyLoad() {
-//        if (!mIsPrepared || !mIsVisible || mHasLoadedOnce) {
-//            return;
-//        }
-//        new LoadWordCollectionTask().execute();
-//    }
 }

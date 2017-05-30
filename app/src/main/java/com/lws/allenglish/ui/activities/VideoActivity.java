@@ -207,6 +207,10 @@ public class VideoActivity extends AppCompatActivity implements SurfaceHolder.Ca
                 }
                 fetchVOAFromInternet(mResultsEntity.postTime.iso, mResultsEntity.tag);
             }
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
         });
         mRecyclerView.setAdapter(mAdapter);
     }

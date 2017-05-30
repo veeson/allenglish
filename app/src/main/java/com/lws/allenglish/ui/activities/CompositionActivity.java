@@ -122,6 +122,11 @@ public class CompositionActivity extends AppCompatActivity {
                 intent.putExtra(AppConstants.DATA_SHEET, "Composition");
                 startActivity(intent);
             }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
         });
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

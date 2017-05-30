@@ -35,4 +35,9 @@
         <item>有道翻译</item>
         <item>谷歌翻译</item>
     </string-array>
+
+    <string-array name="delete_option">
+        <item>删除当前项</item>
+        <item>删除所有项</item>
+    </string-array>
 </resources>

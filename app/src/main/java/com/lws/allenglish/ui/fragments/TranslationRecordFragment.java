@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.lws.allenglish.AppConstants;
 import com.lws.allenglish.R;
 import com.lws.allenglish.adapter.TranslationRecordAdapter;
@@ -29,6 +30,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.R.id.list;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -36,7 +39,6 @@ public class TranslationRecordFragment extends Fragment {
     @BindView(R.id.translation_record)
     RecyclerView mRecyclerView;
 
-    //    private static final String TAG = "TranslationRecordFragme";
     private Context mContext;
     TranslationRecordAdapter mAdapter;
     AllEnglishDatabaseManager mDatabaseManager;
@@ -56,8 +58,6 @@ public class TranslationRecordFragment extends Fragment {
         mDatabaseManager = AllEnglishDatabaseManager.getInstance(mContext);
         initRecyclerView();
         new LoadTranslationRecordTask().execute();
-//        mIsPrepared = true;
-//        lazyLoad();
         return view;
     }
 
@@ -73,8 +73,41 @@ public class TranslationRecordFragment extends Fragment {
                 intent.putExtra(AppConstants.TRANSLATION_RECORD_DATA, mList.get(position));
                 startActivity(intent);
             }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                showDeleteOption(position);
+            }
         });
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void showDeleteOption(final int position) {
+        new MaterialDialog.Builder(mContext)
+                .items(R.array.delete_option)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    BookmarkActivity activity = (BookmarkActivity) getActivity();
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        switch (which) {
+                            case 0:
+                                mDatabaseManager.deleteTranslationRecord(mList.get(position));
+                                mList.remove(position);
+                                mAdapter.notifyItemRemoved(position);
+                                activity.mAdapter.refreshPagerTitle(1, "翻译(" + mList.size() + ")");
+                                break;
+                            case 1:
+                                mDatabaseManager.deleteAllTranslationRecords();
+                                mList.clear();
+                                mAdapter.notifyDataSetChanged();
+                                activity.mAdapter.refreshPagerTitle(1, "翻译(" + mList.size() + ")");
+                                break;
+                        }
+                    }
+                })
+                .contentColor(getResources().getColor(android.R.color.darker_gray))
+                .backgroundColor(getResources().getColor(android.R.color.white))
+                .show();
     }
 
     private void onRefreshComplete() {
@@ -98,16 +131,6 @@ public class TranslationRecordFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             onRefreshComplete();
-//            mHasLoadedOnce = true;
         }
-
     }
-
-//    @Override
-//    protected void lazyLoad() {
-//        if (!mIsPrepared || !mIsVisible || mHasLoadedOnce) {
-//            return;
-//        }
-//        new LoadTranslationRecordTask().execute();
-//    }
 }

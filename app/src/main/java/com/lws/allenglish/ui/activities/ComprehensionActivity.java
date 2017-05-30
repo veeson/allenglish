@@ -120,6 +120,11 @@ public class ComprehensionActivity extends AppCompatActivity {
                 intent.putExtra(AppConstants.BASE_ENGLISH, mList.get(position));
                 startActivity(intent);
             }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
         });
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
