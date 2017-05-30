@@ -6,3 +6,20 @@
 
 #  截图
 
+<p>
+  <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-02-00-595_com.lws.alleng.png" width="213" height="300"/>
+  <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-02-11-670_com.lws.alleng.png" width="213" height="300"/>
+  <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-02-39-378_com.lws.alleng.png" width="213" height="300"/>
+  <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-02-49-908_com.lws.alleng.png" width="213" height="300"/>
+</p>
+
+<p>
+  <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-03-54-319_com.lws.alleng.png" width="213" height="300"/>
+  <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-05-20-104_com.lws.alleng.png" width="213" height="300"/>
+  <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-04-38-135_com.lws.alleng.png" width="213" height="300"/>
+  <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-04-08-646_com.lws.alleng.png" width="213" height="300"/>
+</p>
+
+<p>
+  <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-04-02-070_com.lws.alleng.png" width="213" height="300"/>
+</p>
