@@ -2,6 +2,7 @@ package com.lws.allenglish.ui.fragments;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
@@ -19,8 +21,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.lws.allenglish.AppConstants;
@@ -286,17 +286,26 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
      * 选择翻译引擎
      */
     private void selectTranslationSource() {
-        new MaterialDialog.Builder(mContext)
-                .items(R.array.trans_source_array)
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        mTranslationSource.setText(text.toString());
-                    }
-                })
-                .contentColor(getResources().getColor(android.R.color.darker_gray))
-                .backgroundColor(getResources().getColor(android.R.color.white))
-                .show();
+//        new MaterialDialog.Builder(mContext)
+//                .items(R.array.trans_source_array)
+//                .itemsCallback(new MaterialDialog.ListCallback() {
+//                    @Override
+//                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+//                        mTranslationSource.setText(text.toString());
+//                    }
+//                })
+//                .contentColor(getResources().getColor(android.R.color.darker_gray))
+//                .backgroundColor(getResources().getColor(android.R.color.white))
+//                .show();
+
+        final CharSequence[] items = {"百度翻译", "有道翻译", "谷歌翻译"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                mTranslationSource.setText(items[item].toString());
+            }
+        }).show();
     }
 
     private void translate(String text) {
@@ -324,27 +333,45 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
     }
 
     private void showAboutTxtTranslationDialog() {
-        new MaterialDialog.Builder(getActivity())
-                .content("文本翻译是一项测试功能，目前只支持TXT文本，比如filename.txt，暂不支持.doc等其它任何格式的文本。")
-                .positiveText("选择文本")
-                .negativeText("取消")
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
+//        new MaterialDialog.Builder(getActivity())
+//                .content("文本翻译是一项测试功能，目前只支持TXT文本，比如filename.txt，暂不支持.doc等其它任何格式的文本。")
+//                .positiveText("选择文本")
+//                .negativeText("取消")
+//                .onPositive(new MaterialDialog.SingleButtonCallback() {
+//                    @Override
+//                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                        showFileChooser();
+//                        dialog.dismiss();
+//                    }
+//                })
+//                .onNegative(new MaterialDialog.SingleButtonCallback() {
+//                    @Override
+//                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                        dialog.dismiss();
+//                    }
+//                })
+//                .negativeColor(getResources().getColor(android.R.color.holo_red_dark))
+//                .positiveColor(getResources().getColor(android.R.color.holo_red_dark))
+//                .contentColor(getResources().getColor(android.R.color.darker_gray))
+//                .backgroundColor(getResources().getColor(android.R.color.white))
+//                .show();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext, R.style.AppCompatAlertDialogStyle);
+        builder.setMessage("文本翻译是一项测试功能，目前只支持TXT文本，比如filename.txt，暂不支持.doc等其它任何格式的文本。")
+                .setPositiveButton("选择文本", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
                         showFileChooser();
-                        dialog.dismiss();
                     }
                 })
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
                         dialog.dismiss();
                     }
                 })
-                .negativeColor(getResources().getColor(android.R.color.holo_red_dark))
-                .positiveColor(getResources().getColor(android.R.color.holo_red_dark))
-                .contentColor(getResources().getColor(android.R.color.darker_gray))
-                .backgroundColor(getResources().getColor(android.R.color.white))
                 .show();
     }
 
@@ -385,18 +412,29 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
             }
             mInputTranslationText.setText(fileText);
         } else {
-            new MaterialDialog.Builder(mContext)
-                    .content("sorry~~~文本翻译目前只支持.txt文本格式.")
-                    .positiveText("")
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+//            new MaterialDialog.Builder(mContext)
+//                    .content("sorry~~~文本翻译目前只支持.txt文本格式.")
+//                    .positiveText("")
+//                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+//                        @Override
+//                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                            dialog.dismiss();
+//                        }
+//                    })
+//                    .positiveColor(getResources().getColor(android.R.color.holo_red_dark))
+//                    .contentColor(getResources().getColor(android.R.color.darker_gray))
+//                    .backgroundColor(getResources().getColor(android.R.color.white))
+//                    .show();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext, R.style.AppCompatAlertDialogStyle);
+            builder.setMessage("sorry~~~文本翻译目前只支持.txt文本格式.")
+                    .setPositiveButton("好的", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        public void onClick(DialogInterface dialog,
+                                            int which) {
                             dialog.dismiss();
                         }
                     })
-                    .positiveColor(getResources().getColor(android.R.color.holo_red_dark))
-                    .contentColor(getResources().getColor(android.R.color.darker_gray))
-                    .backgroundColor(getResources().getColor(android.R.color.white))
                     .show();
         }
     }

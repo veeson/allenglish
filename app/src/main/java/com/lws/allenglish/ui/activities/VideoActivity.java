@@ -1,6 +1,7 @@
 package com.lws.allenglish.ui.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
@@ -11,8 +12,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,8 +35,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.lws.allenglish.AppConstants;
@@ -105,8 +104,6 @@ public class VideoActivity extends AppCompatActivity implements SurfaceHolder.Ca
     private MediaPlayer mMediaPlayer;
     // 是否需要从网络上获取视频流
     private boolean mNeedToFetchFromInternet = true;
-    // 是否是暂停状态
-//    private boolean mIsPause = false;
     //是否全屏
     private boolean mFullScreen = false;
     //媒体音量管理
@@ -426,29 +423,25 @@ public class VideoActivity extends AppCompatActivity implements SurfaceHolder.Ca
                         return;
                     }
                     if (!NetWorkUtils.getNetworkTypeName(mContext).equals(NetWorkUtils.NETWORK_TYPE_WIFI)) {
-                        new MaterialDialog.Builder(this)
-                                .content("当前非WIFI环境，将消耗移动流量，是否继续播放？")
-                                .positiveText("确定")
-                                .negativeText("取消")
-                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+                        builder.setMessage("当前非WIFI环境，将消耗移动流量，是否继续播放？")
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-//                                        mNeedToFetchFromInternet = false;
+                                    public void onClick(DialogInterface dialog,
+                                                        int which) {
+                                        mNeedToFetchFromInternet = false;
                                         fetchVideoFromInternet(mVideoUrl);
                                         mControlPlay.setVisibility(View.GONE);
                                         mProgressBar.setVisibility(View.VISIBLE);
                                     }
                                 })
-                                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    public void onClick(DialogInterface dialog,
+                                                        int which) {
                                         dialog.dismiss();
                                     }
                                 })
-                                .negativeColor(getResources().getColor(android.R.color.holo_red_dark))
-                                .positiveColor(getResources().getColor(android.R.color.holo_red_dark))
-                                .contentColor(getResources().getColor(android.R.color.darker_gray))
-                                .backgroundColor(getResources().getColor(android.R.color.white))
                                 .show();
                     } else {
 //                        mNeedToFetchFromInternet = false;
@@ -597,7 +590,7 @@ public class VideoActivity extends AppCompatActivity implements SurfaceHolder.Ca
     }
 
     private String formatTime(long time) {
-        SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("mm:ss", Locale.CHINA);
         return format.format(time);
     }
 

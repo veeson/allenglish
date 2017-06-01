@@ -10,7 +10,7 @@
     <color name="bottom_tab_text_color_selected">#3F51B5</color>
     <color name="press_grey">#f0f0f0</color>
     <color name="icon_press_selected">#00838F</color>
-    <color name="press_white">#ffffff</color>
+    <color name="press_white">@android:color/white</color>
     <color name="icon_press_normal">@color/app_color</color>
     <color name="light_grey">#e6e6e6</color>
     <color name="text_color">#616161</color>

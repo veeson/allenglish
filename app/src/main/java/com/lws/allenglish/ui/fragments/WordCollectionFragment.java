@@ -2,17 +2,18 @@ package com.lws.allenglish.ui.fragments;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.lws.allenglish.AppConstants;
 import com.lws.allenglish.R;
 import com.lws.allenglish.adapter.WordCollectionAdapter;
@@ -81,31 +82,29 @@ public class WordCollectionFragment extends Fragment {
     }
 
     private void showDeleteOption(final int position) {
-        new MaterialDialog.Builder(mContext)
-                .items(R.array.delete_option)
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    BookmarkActivity activity = (BookmarkActivity) getActivity();
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        switch (which) {
-                            case 0:
-                                mDatabaseManager.cancelCollectedWord(mList.get(position).word);
-                                mList.remove(position);
-                                mAdapter.notifyItemRemoved(position);
-                                activity.mAdapter.refreshPagerTitle(0, "生词本(" + mList.size() + ")");
-                                break;
-                            case 1:
-                                mDatabaseManager.cancelAllCollectedWords();
-                                mList.clear();
-                                mAdapter.notifyDataSetChanged();
-                                activity.mAdapter.refreshPagerTitle(0, "生词本(" + mList.size() + ")");
-                                break;
-                        }
-                    }
-                })
-                .contentColor(getResources().getColor(android.R.color.darker_gray))
-                .backgroundColor(getResources().getColor(android.R.color.white))
-                .show();
+        final CharSequence[] items = {"删除当前项", "删除所有项"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            BookmarkActivity activity = (BookmarkActivity) getActivity();
+
+            public void onClick(DialogInterface dialog, int item) {
+                switch (item) {
+                    case 0:
+                        mDatabaseManager.cancelCollectedWord(mList.get(position).word);
+                        mList.remove(position);
+                        mAdapter.notifyItemRemoved(position);
+                        activity.mAdapter.refreshPagerTitle(0, "生词本(" + mList.size() + ")");
+                        break;
+                    case 1:
+                        mDatabaseManager.cancelAllCollectedWords();
+                        mList.clear();
+                        mAdapter.notifyDataSetChanged();
+                        activity.mAdapter.refreshPagerTitle(0, "生词本(" + mList.size() + ")");
+                        break;
+                }
+            }
+        }).show();
     }
 
     private void onRefreshComplete() {

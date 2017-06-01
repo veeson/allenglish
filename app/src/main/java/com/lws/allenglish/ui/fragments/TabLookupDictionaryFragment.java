@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +22,6 @@ import com.lws.allenglish.ui.activities.BookmarkActivity;
 import com.lws.allenglish.ui.activities.LeaningEnglishActivity;
 import com.lws.allenglish.ui.activities.SearchWordActivity;
 import com.lws.allenglish.ui.activities.WordDetailsActivity;
-
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -75,7 +72,7 @@ public class TabLookupDictionaryFragment extends Fragment {
 
     private void randomWord() {
         mBaseWord = DictionaryDatabaseManager.randomWord();
-        if (TextUtils.isEmpty(mBaseWord.word)){
+        if (TextUtils.isEmpty(mBaseWord.word)) {
             mBaseWord = DictionaryDatabaseManager.randomWord();
         }
         mRandomWord.setText(mBaseWord.word);
