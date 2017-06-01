@@ -16,7 +16,7 @@
 <p>
   <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-03-54-319_com.lws.alleng.png" width="213" height="300"/>
   <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-05-20-104_com.lws.alleng.png" width="213" height="300"/>
-  <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-04-38-135_com.lws.alleng.png" width="213" height="300"/>
+  <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-06-01-14-45-44-842_com.lws.alleng.png" width="213" height="300"/>
   <img src="https://github.com/Veeson/allenglish/blob/master/screenshot/Screenshot_2017-05-30-09-04-08-646_com.lws.alleng.png" width="213" height="300"/>
 </p>
 
