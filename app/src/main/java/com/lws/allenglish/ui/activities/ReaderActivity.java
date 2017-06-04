@@ -1,6 +1,7 @@
 package com.lws.allenglish.ui.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -118,10 +119,11 @@ public class ReaderActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Reader.ResultsEntity resultsEntity = mList.get(position);
-                setContent(resultsEntity.newsTitle, resultsEntity.source, resultsEntity.postTime.iso, resultsEntity.newsContent);
-                mNestedScrollView.scrollTo(0, 0);
-                fetchReaderFromInternet(mDataSheet, resultsEntity.createdAt, resultsEntity.tag);
+                Intent intent = getIntent();
+                intent.putExtra(AppConstants.BASE_ENGLISH, mList.get(position));
+                intent.putExtra(AppConstants.DATA_SHEET, mDataSheet);
+                finish();
+                startActivity(intent);
             }
 
             @Override
@@ -149,7 +151,7 @@ public class ReaderActivity extends AppCompatActivity {
         headers.put(AppConstants.X_LC_Id, AppConstants.X_LC_ID_VALUE);
         headers.put(AppConstants.X_LC_Key, AppConstants.X_LC_KEY_VALUE);
         String url = "https://leancloud.cn:443/1.1/classes/" + dataSheet + "?where={\"createdAt\":{\"$lt\":{\"__type\":\"Date\",\"iso\":\"" + date + "\"}},\"tag\":\"" + StringUtils.encodeText(tag) + "\"}}&limit=5&&order=-createdAt";
-        VolleySingleton.getInstance(mContext)
+        VolleySingleton.getInstance()
                 .addToRequestQueue(new GsonRequest<>(url, Reader.class, headers, new Response.Listener<Reader>() {
                     @Override
                     public void onResponse(Reader response) {

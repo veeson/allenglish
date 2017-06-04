@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,7 +38,6 @@ public class SearchWordActivity extends AppCompatActivity {
     @BindView(R.id.word_matching)
     RecyclerView mRecyclerView;
 
-    //    private static final String TAG = "SearchWordActivity";
     private BaseWordAdapter mAdapter;
     private AllEnglishDatabaseManager mDatabaseManager;
     private List<BaseWord> mList = new ArrayList<>();
@@ -48,7 +48,6 @@ public class SearchWordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_word);
         ButterKnife.bind(this);
         mDatabaseManager = AllEnglishDatabaseManager.getInstance(this);
-//        DictionaryDatabaseManager.openDatabase(this); // 打开离线词典数据库
         mList.addAll(mDatabaseManager.loadQueriedWords());
         Collections.reverse(mList);
         initRecyclerView();
@@ -62,19 +61,27 @@ public class SearchWordActivity extends AppCompatActivity {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
                 mLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
-//        mRecyclerView.addItemDecoration(new DividerDecoration(this));
 
         mAdapter = new BaseWordAdapter(mList);
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 BaseWord baseWord = mList.get(position);
-                if (!mDatabaseManager.existSearchWordHistory(baseWord.word))
-                    mDatabaseManager.saveQueriedWord(baseWord);
-                Intent intent = new Intent(SearchWordActivity.this, WordDetailsActivity.class);
-                intent.putExtra(AppConstants.BASE_INFO, baseWord);
-                startActivity(intent);
+                if ("".equals(mList.get(position).means)) {
+                    Log.d("11111", "onItemClick: " + mList.get(position).word);
+                    Intent intent = new Intent();
+                    intent.putExtra("TO_TRANSLATE", mList.get(position).word);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } else {
+                    if (!mDatabaseManager.existSearchWordHistory(baseWord.word))
+                        mDatabaseManager.saveQueriedWord(baseWord);
+                    Intent intent = new Intent(SearchWordActivity.this, WordDetailsActivity.class);
+                    intent.putExtra(AppConstants.BASE_INFO, baseWord);
+                    startActivity(intent);
+                }
             }
+
             @Override
             public void onItemLongClick(View view, int position) {
 

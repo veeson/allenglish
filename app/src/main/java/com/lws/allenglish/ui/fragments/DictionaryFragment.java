@@ -207,7 +207,7 @@ public class DictionaryFragment extends Fragment {
     }
 
     private void fetchXinhuaDictionary(String text) {
-        VolleySingleton.getInstance(BaseApplication.getInstance()).addToRequestQueue(new GsonRequest<>("http://v.juhe.cn/xhzd/query?key=63ca50d904e451ad97e42204eb84247d&word=" +
+        VolleySingleton.getInstance().addToRequestQueue(new GsonRequest<>("http://v.juhe.cn/xhzd/query?key=63ca50d904e451ad97e42204eb84247d&word=" +
                 StringUtils.encodeText(text), XinhuaDictionary.class, null, new Response.Listener<XinhuaDictionary>() {
             @Override
             public void onResponse(XinhuaDictionary response) {
@@ -225,7 +225,7 @@ public class DictionaryFragment extends Fragment {
     }
 
     private void fetchIdiomsDictionary(String text) {
-        VolleySingleton.getInstance(BaseApplication.getInstance()).addToRequestQueue(new GsonRequest<>("http://v.juhe.cn/chengyu/query?key=49c4ec6b09923b57b6aa6ef64d670149&word=" +
+        VolleySingleton.getInstance().addToRequestQueue(new GsonRequest<>("http://v.juhe.cn/chengyu/query?key=49c4ec6b09923b57b6aa6ef64d670149&word=" +
                 StringUtils.encodeText(text), IdiomsDictionary.class, null, new Response.Listener<IdiomsDictionary>() {
             @Override
             public void onResponse(IdiomsDictionary response) {

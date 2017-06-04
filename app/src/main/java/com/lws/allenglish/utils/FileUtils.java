@@ -41,6 +41,10 @@ public class FileUtils {
                 }
             } catch (Exception e) {
                 // Eat it
+            } finally {
+                if (cursor != null && !cursor.isClosed()) {
+                    cursor.close();
+                }
             }
         } else if ("file".equalsIgnoreCase(uri.getScheme())) {
             return uri.getPath();

@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.lws.allenglish.R;
 import com.lws.allenglish.adapter.ViewPagerAdapter;
-import com.lws.allenglish.ui.fragments.ArticleCollectionFragment;
 import com.lws.allenglish.ui.fragments.TranslationRecordFragment;
 import com.lws.allenglish.ui.fragments.WordCollectionFragment;
 

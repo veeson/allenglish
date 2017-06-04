@@ -46,14 +46,21 @@
         <activity
             android:name=".ui.activities.LeaningEnglishActivity"
             android:label="@string/learning_english" />
-        <activity android:name=".ui.activities.ReaderActivity" />
-        <activity android:name=".ui.activities.VOAActivity" />
+        <activity
+            android:name=".ui.activities.ReaderActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activities.VOAActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.activities.VideoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
             android:screenOrientation="sensor"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".ui.activities.ComprehensionEnglishActivity" />
+        <activity
+            android:name=".ui.activities.ComprehensionEnglishActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.activities.ComprehensionActivity"
             android:label="@string/comprehension" />

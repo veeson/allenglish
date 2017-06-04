@@ -1,12 +1,9 @@
 package com.lws.allenglish.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import android.support.v4.util.LruCache;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +51,7 @@ public class ReaderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.mList = mList;
         this.mPageNumber = mPageNumber;
         this.mFlag = mFlag;
-        mImageLoader = new ImageLoader(VolleySingleton.getInstance(mContext).getRequestQueue(), new BitmapCache());
+        mImageLoader = new ImageLoader(VolleySingleton.getInstance().getRequestQueue(), new BitmapCache());
     }
 
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {

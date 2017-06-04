@@ -6,12 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
-import com.lws.allenglish.bean.BaseIcibaDailySentence;
 import com.lws.allenglish.bean.BaseWord;
 import com.lws.allenglish.bean.TranslationRecord;
 import com.lws.allenglish.utils.TimeUtils;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -179,54 +177,6 @@ public class AllEnglishDatabaseManager {
         }
         closeCursor(cursor);
         return is;
-    }
-
-
-    public void saveIcibaDailySentence(@NonNull BaseIcibaDailySentence record) {
-        ContentValues values = new ContentValues();
-        values.put("tts", record.tts);
-        values.put("content", record.content);
-        values.put("note", record.note);
-        values.put("dateline", record.dateline);
-        mSqLiteDatabase.insert("IcibaDailySentence", null, values);
-    }
-
-    public BaseIcibaDailySentence loadIcibaDailySentence(@NonNull String dateline) {
-        BaseIcibaDailySentence sentence = new BaseIcibaDailySentence();
-        Cursor cursor = mSqLiteDatabase.rawQuery("SELECT * FROM IcibaDailySentence WHERE dateline = ?", new String[]{dateline});
-        if (cursor.moveToNext()) {
-            sentence.tts = cursor.getString(1);
-            sentence.content = cursor.getString(2);
-            sentence.note = cursor.getString(3);
-            sentence.dateline = cursor.getString(4);
-        }
-        closeCursor(cursor);
-        return sentence;
-    }
-
-    public List<BaseIcibaDailySentence> loadIcibaDailySentences() {
-        List<BaseIcibaDailySentence> list = new ArrayList<>();
-        Cursor cursor = mSqLiteDatabase.rawQuery("SELECT * FROM IcibaDailySentence", null);
-        while (cursor.moveToNext()) {
-            BaseIcibaDailySentence record = new BaseIcibaDailySentence();
-            record.tts = cursor.getString(1);
-            record.content = cursor.getString(2);
-            record.note = cursor.getString(3);
-            record.dateline = cursor.getString(4);
-            list.add(record);
-        }
-        closeCursor(cursor);
-        return list;
-    }
-
-    public boolean existBaseIcibaDailySentence(@NonNull String dateline) {
-        boolean exist = false;
-        Cursor cursor = mSqLiteDatabase.rawQuery("SELECT dateline FROM IcibaDailySentence WHERE dateline = ?", new String[]{dateline});
-        if (cursor.moveToNext()) {
-            exist = true;
-        }
-        closeCursor(cursor);
-        return exist;
     }
 
     private void closeCursor(Cursor cursor) {

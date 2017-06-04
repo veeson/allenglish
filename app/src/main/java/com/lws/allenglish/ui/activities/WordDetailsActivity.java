@@ -184,14 +184,6 @@ public class WordDetailsActivity extends AppCompatActivity{
                     case R.id.copy:
                         StringUtils.copyToClipboard(mContext, mWord.getText().toString());
                         return true;
-//                    case R.id.add_new_word:
-//                        if (!mCollection.isSelected()) {
-//                            mDatabaseManager.saveCollectedWord(mBaseWord);
-//                            mCollection.setSelected(true);
-//                        } else {
-//                            Toast.makeText(WordDetailsActivity.this, "生词已存在", Toast.LENGTH_SHORT).show();
-//                        }
-//                        return true;
                     case R.id.open_bookmark:
                         Intent intent = new Intent(mContext, BookmarkActivity.class);
                         startActivity(intent);
@@ -207,7 +199,7 @@ public class WordDetailsActivity extends AppCompatActivity{
     }
 
     private void fetchWordInfoFromInternet(String word) {
-        VolleySingleton.getInstance(mContext).addToRequestQueue(new GsonRequest<>("http://www.iciba.com/index.php?a=getWordMean&c=search&list=1,4,8,9,12,13,14,15&word=" + word + "&_=1479203939913",
+        VolleySingleton.getInstance().addToRequestQueue(new GsonRequest<>("http://www.iciba.com/index.php?a=getWordMean&c=search&list=1,4,8,9,12,13,14,15&word=" + word + "&_=1479203939913",
                 DetailedWord.class,
                 null,
                 new Response.Listener<DetailedWord>() {
@@ -221,7 +213,6 @@ public class WordDetailsActivity extends AppCompatActivity{
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                Log.e(TAG, "onErrorResponse: " + error.toString());
                 Toast.makeText(WordDetailsActivity.this, R.string.error_loading, Toast.LENGTH_SHORT).show();
             }
         }));

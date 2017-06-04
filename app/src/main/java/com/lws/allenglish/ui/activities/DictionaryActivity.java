@@ -1,16 +1,15 @@
 package com.lws.allenglish.ui.activities;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.lws.allenglish.R;
 import com.lws.allenglish.adapter.ViewPagerAdapter;
 import com.lws.allenglish.ui.fragments.DictionaryFragment;
-import com.lws.allenglish.ui.fragments.ReaderFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

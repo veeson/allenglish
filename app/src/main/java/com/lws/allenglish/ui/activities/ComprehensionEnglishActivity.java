@@ -1,6 +1,7 @@
 package com.lws.allenglish.ui.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -167,18 +168,10 @@ public class ComprehensionEnglishActivity extends AppCompatActivity implements M
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                mResultsEntity = mList.get(position);
-                setContent(mResultsEntity.newsTitle, mResultsEntity.source, mResultsEntity.postTime.iso, mResultsEntity.newsContent);
-                mPlayerControl.setSelected(false);
-                mNeedToFetchFromInternet = true;
-                if (mMediaPlayer.isPlaying()) {
-                    mMediaPlayer.pause();
-                }
-                Message msg = mHandler.obtainMessage();
-                msg.what = 2;
-                msg.sendToTarget();
-                mNestedScrollView.scrollTo(0, 0);
-                fetchVOAAudioFromInternet(mResultsEntity.postTime.iso, mResultsEntity.tag);
+                Intent intent = getIntent();
+                intent.putExtra(AppConstants.BASE_ENGLISH, mList.get(position));
+                finish();
+                startActivity(intent);
             }
 
             @Override
@@ -217,7 +210,7 @@ public class ComprehensionEnglishActivity extends AppCompatActivity implements M
         headers.put(AppConstants.X_LC_Id, AppConstants.X_LC_ID_VALUE);
         headers.put(AppConstants.X_LC_Key, AppConstants.X_LC_KEY_VALUE);
         String url = "https://leancloud.cn:443/1.1/classes/Comprehension?where={\"postTime\":{\"$lt\":{\"__type\":\"Date\",\"iso\":\"" + date + "\"}},\"tag\":\"" + StringUtils.encodeText(tag) + "\",}}&limit=5&&order=-createdAt";
-        VolleySingleton.getInstance(mContext)
+        VolleySingleton.getInstance()
                 .addToRequestQueue(new GsonRequest<>(url, Comprehension.class, headers, new Response.Listener<Comprehension>() {
                     @Override
                     public void onResponse(Comprehension response) {
@@ -268,9 +261,11 @@ public class ComprehensionEnglishActivity extends AppCompatActivity implements M
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mMediaPlayer.reset();
-        mMediaPlayer.release();
-        mMediaPlayer = null;
+        if (mMediaPlayer != null) {
+            mMediaPlayer.reset();
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
     }
 
     @Override

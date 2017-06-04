@@ -12,7 +12,6 @@ import com.lws.allenglish.R;
 import com.lws.allenglish.adapter.TabAdapter;
 import com.lws.allenglish.ui.fragments.TabLearningFragment;
 import com.lws.allenglish.ui.fragments.TabLookupDictionaryFragment;
-import com.lws.allenglish.ui.fragments.TabMeFragment;
 import com.lws.allenglish.ui.fragments.TabTranslationFragment;
 import com.lws.allenglish.view.MainBottomTabLayout;
 
@@ -37,11 +36,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewpager(ViewPager viewPager) {
-        final TabAdapter adapter = new TabAdapter(getSupportFragmentManager());
+        TabAdapter adapter = new TabAdapter(getSupportFragmentManager());
         adapter.addFragment(new TabLookupDictionaryFragment());
-        adapter.addFragment(new TabTranslationFragment());
+        adapter.addFragment(TabTranslationFragment.newInstance(""));
         adapter.addFragment(new TabLearningFragment());
-//        adapter.addFragment(new TabMeFragment());
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
         mBottomTabLayout.setViewPager(viewPager);
@@ -73,4 +71,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
 }

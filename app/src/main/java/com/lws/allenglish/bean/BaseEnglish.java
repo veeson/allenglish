@@ -8,7 +8,6 @@ import java.util.List;
  */
 
 public class BaseEnglish {
-//    public transient List<ResultsEntity> results;
 
     public static class ResultsEntity implements Serializable {
         /**

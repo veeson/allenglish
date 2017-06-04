@@ -3,7 +3,6 @@ package com.lws.allenglish.db;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.lws.allenglish.R;
 import com.lws.allenglish.bean.BaseWord;
@@ -62,6 +61,7 @@ public class DictionaryDatabaseManager {
         }
         if (!cursor.isClosed()) {
             cursor.close();
+            cursor = null;
         }
         return baseWord;
     }
@@ -89,50 +89,50 @@ public class DictionaryDatabaseManager {
         }
     }
 
-    private static class OpenDictionaryDatabaseThread extends Thread {
-        private Context context;
-
-        OpenDictionaryDatabaseThread(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public void run() {
-            try {
-                // 获得dictionary.db文件的绝对路径
-//                String databaseFilename = DATABASE_PATH + "/" + DATABASE_FILENAME;
-//                File dir = new File(DATABASE_PATH);
-                File dir = new File(context.getFilesDir(), DATABASE_FILENAME);
-                // 如果/sdcard/dictionary目录中存在，创建这个目录
-//                if (!dir.exists())
-//                    dir.mkdir();
-                // 如果在/sdcard/dictionary目录中不存在
-                // dictionary.db文件，则从res\raw目录中复制这个文件到
-                // SD卡的目录（/sdcard/dictionary）
-                if (!(new File(dir.toString())).exists()) {
-                    // 获得封装dictionary.db文件的InputStream对象
-                    InputStream is = context.getResources().openRawResource(R.raw.dictionary);
-                    FileOutputStream fos = new FileOutputStream(dir);
-                    byte[] buffer = new byte[8192];
-                    int count = 0;
-                    // 开始复制dictionary.db文件
-                    while ((count = is.read(buffer)) > 0) {
-                        fos.write(buffer, 0, count);
-                    }
-
-                    fos.close();
-                    is.close();
-                }
-                // 打开/sdcard/dictionary目录中的dictionary.db文件
-                dictionaryDatabase = SQLiteDatabase.openOrCreateDatabase(
-                        dir, null);
-                dictionaryDatabase.rawQuery("PRAGMA case_sensitive_like = ON", null);
-//                dictionaryDatabase.rawQuery("CREATE INDEX index_word ON iciba (word_name)", null);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    private static class OpenDictionaryDatabaseThread extends Thread {
+//        private Context context;
+//
+//        OpenDictionaryDatabaseThread(Context context) {
+//            this.context = context;
+//        }
+//
+//        @Override
+//        public void run() {
+//            try {
+//                // 获得dictionary.db文件的绝对路径
+////                String databaseFilename = DATABASE_PATH + "/" + DATABASE_FILENAME;
+////                File dir = new File(DATABASE_PATH);
+//                File dir = new File(context.getFilesDir(), DATABASE_FILENAME);
+//                // 如果/sdcard/dictionary目录中存在，创建这个目录
+////                if (!dir.exists())
+////                    dir.mkdir();
+//                // 如果在/sdcard/dictionary目录中不存在
+//                // dictionary.db文件，则从res\raw目录中复制这个文件到
+//                // SD卡的目录（/sdcard/dictionary）
+//                if (!(new File(dir.toString())).exists()) {
+//                    // 获得封装dictionary.db文件的InputStream对象
+//                    InputStream is = context.getResources().openRawResource(R.raw.dictionary);
+//                    FileOutputStream fos = new FileOutputStream(dir);
+//                    byte[] buffer = new byte[8192];
+//                    int count = 0;
+//                    // 开始复制dictionary.db文件
+//                    while ((count = is.read(buffer)) > 0) {
+//                        fos.write(buffer, 0, count);
+//                    }
+//
+//                    fos.close();
+//                    is.close();
+//                }
+//                // 打开/sdcard/dictionary目录中的dictionary.db文件
+//                dictionaryDatabase = SQLiteDatabase.openOrCreateDatabase(
+//                        dir, null);
+//                dictionaryDatabase.rawQuery("PRAGMA case_sensitive_like = ON", null);
+////                dictionaryDatabase.rawQuery("CREATE INDEX index_word ON iciba (word_name)", null);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
 }
 

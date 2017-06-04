@@ -14,7 +14,6 @@ import com.lws.allenglish.R;
 import com.lws.allenglish.ui.activities.BookmarkActivity;
 import com.lws.allenglish.ui.activities.CompositionActivity;
 import com.lws.allenglish.ui.activities.ComprehensionActivity;
-import com.lws.allenglish.ui.activities.ComprehensionEnglishActivity;
 import com.lws.allenglish.ui.activities.DictionaryActivity;
 import com.lws.allenglish.ui.activities.LeaningEnglishActivity;
 import com.lws.allenglish.ui.activities.WordActivity;

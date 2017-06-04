@@ -2,6 +2,7 @@ package com.lws.allenglish.ui.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
@@ -185,24 +186,10 @@ public class VideoActivity extends AppCompatActivity implements SurfaceHolder.Ca
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                synchronized (this) {
-                    mResultsEntity = mList.get(position);
-                    setContent();
-                    mNeedToFetchFromInternet = true;
-                    mProgressBar.setVisibility(View.GONE);
-                    mCurrentTime.setText(R.string.oo_oo);
-                    mCountTime.setText(R.string.oo_oo);
-                    if (mMediaPlayer.isPlaying()) {
-                        mMediaPlayer.pause();
-                    }
-                    Message msg = mHandler.obtainMessage();
-                    msg.what = 2;
-                    msg.sendToTarget();
-                    mControlPlay.setBackgroundResource(R.drawable.ic_action_play_white_big);
-                    refreshControlLayout(true);
-                    mNestedScrollView.scrollTo(0, 0);
-                }
-                fetchVOAFromInternet(mResultsEntity.postTime.iso, mResultsEntity.tag);
+                Intent intent = getIntent();
+                intent.putExtra(AppConstants.BASE_ENGLISH, mList.get(position));
+                finish();
+                startActivity(intent);
             }
             @Override
             public void onItemLongClick(View view, int position) {
@@ -230,7 +217,7 @@ public class VideoActivity extends AppCompatActivity implements SurfaceHolder.Ca
         headers.put(AppConstants.X_LC_Id, AppConstants.X_LC_ID_VALUE);
         headers.put(AppConstants.X_LC_Key, AppConstants.X_LC_KEY_VALUE);
         String url = "https://leancloud.cn:443/1.1/classes/Video?where={\"postTime\":{\"$lt\":{\"__type\":\"Date\",\"iso\":\"" + date + "\"}},\"tag\":\"" + StringUtils.encodeText(tag) + "\",}}&limit=5&&order=-createdAt";
-        VolleySingleton.getInstance(mContext)
+        VolleySingleton.getInstance()
                 .addToRequestQueue(new GsonRequest<>(url, VOA.class, headers, new Response.Listener<VOA>() {
                     @Override
                     public void onResponse(VOA response) {
@@ -444,7 +431,6 @@ public class VideoActivity extends AppCompatActivity implements SurfaceHolder.Ca
                                 })
                                 .show();
                     } else {
-//                        mNeedToFetchFromInternet = false;
                         fetchVideoFromInternet(mVideoUrl);
                         mControlPlay.setVisibility(View.GONE);
                         mProgressBar.setVisibility(View.VISIBLE);

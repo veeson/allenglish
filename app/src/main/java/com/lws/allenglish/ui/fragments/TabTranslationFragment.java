@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -17,6 +16,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +59,7 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
     @BindView(R.id.translate)
     TextView mTranslate;
     @BindView(R.id.input_translation_text)
-    TextView mInputTranslationText;
+    EditText mInputTranslationText;
     @BindView(R.id.clear_input)
     ImageView mClearInput;
     @BindView(R.id.load_file)
@@ -75,7 +75,6 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
     @BindView(R.id.expand)
     ImageView mExpand;
 
-    //    private static final String TAG = "TabTranslationFragment";
     private static final int FILE_SELECT_CODE = 0;
     private static final int BAIDU_TRANSLATION_WHAT = 1;
     private static final int YOUDAO_TRANSLATION_WHAT = 2;
@@ -120,8 +119,12 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
         }
     };
 
-    public TabTranslationFragment() {
-        // Required empty public constructor
+    public static TabTranslationFragment newInstance(String s) {
+        TabTranslationFragment myFragment = new TabTranslationFragment();
+        Bundle args = new Bundle();
+        args.putString("TRANSLATION_TEXT", s);
+        myFragment.setArguments(args);
+        return myFragment;
     }
 
 
@@ -134,6 +137,11 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
         mPlayAudio = new PlayAudio();
         mDatabaseManager = AllEnglishDatabaseManager.getInstance(mContext);
         setUi();
+        String originalText = getArguments().getString("Trans_text", "");
+        if (!TextUtils.isEmpty(originalText)) {
+            mInputTranslationText.setText(originalText);
+            mTranslate.performLongClick();
+        }
         return view;
     }
 
@@ -151,31 +159,7 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
         mTranslationResult.setTextIsSelectable(true); // 设置文本可选
 
 //        TODO: 2016/12/15 后面考虑给用户加个是否每次变换翻译引擎后即刻翻译已有文本的选项
-//        mTranslationSource.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                String text = mInputTranslationText.getText().toString().trim();
-//                if (!text.isEmpty()) {
-//                    if (s.toString().equals("百度翻译")) {
-//                        fetchBaiduTranslation(text);
-//                    } else if (s.toString().equals("有道翻译")) {
-//                        fetchYoudaoTranslation(text);
-//                    } else if (s.toString().equals("谷歌翻译")) {
-//                        fetchGoogleTranslation(text);
-//                    }
-//                } else {
-//                    Toast.makeText(mContext, R.string.input_text_tip, Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+
     }
 
     private void fetchBaiduTranslation(String text) {
@@ -192,7 +176,7 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
                     AppConstants.BAIDU_APPID + "&sign=" + sign + "&from=auto&to=zh&q=" +
                     StringUtils.encodeText(text);
         }
-        VolleySingleton.getInstance(mContext).addToRequestQueue(new GsonRequest<>(url, BaiduTranslation.class, null, new Response.Listener<BaiduTranslation>() {
+        VolleySingleton.getInstance().addToRequestQueue(new GsonRequest<>(url, BaiduTranslation.class, null, new Response.Listener<BaiduTranslation>() {
             @Override
             public void onResponse(BaiduTranslation response) {
                 sendMessage(response, BAIDU_TRANSLATION_WHAT);
@@ -206,7 +190,7 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
     }
 
     private void fetchYoudaoTranslation(String text) {
-        VolleySingleton.getInstance(mContext).addToRequestQueue(new GsonRequest<>("http://fanyi.youdao.com/openapi.do?keyfrom=allenglish&key=1877329489&type=data&doctype=json&version=1.1&only=translate&q=" +
+        VolleySingleton.getInstance().addToRequestQueue(new GsonRequest<>("http://fanyi.youdao.com/openapi.do?keyfrom=allenglish&key=1877329489&type=data&doctype=json&version=1.1&only=translate&q=" +
                 StringUtils.encodeText(text), YoudaoTranslation.class, null, new Response.Listener<YoudaoTranslation>() {
             @Override
             public void onResponse(YoudaoTranslation response) {
@@ -231,7 +215,7 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
         }
         Map<String, String> headers = new HashMap<>();
         headers.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0");
-        VolleySingleton.getInstance(mContext).addToRequestQueue(new GsonRequest<>(url, GoogleTranslation.class, headers, new Response.Listener<GoogleTranslation>() {
+        VolleySingleton.getInstance().addToRequestQueue(new GsonRequest<>(url, GoogleTranslation.class, headers, new Response.Listener<GoogleTranslation>() {
             @Override
             public void onResponse(GoogleTranslation response) {
                 sendMessage(response, GOOGLE_TRANSLATION_WHAT);
@@ -286,20 +270,7 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
      * 选择翻译引擎
      */
     private void selectTranslationSource() {
-//        new MaterialDialog.Builder(mContext)
-//                .items(R.array.trans_source_array)
-//                .itemsCallback(new MaterialDialog.ListCallback() {
-//                    @Override
-//                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-//                        mTranslationSource.setText(text.toString());
-//                    }
-//                })
-//                .contentColor(getResources().getColor(android.R.color.darker_gray))
-//                .backgroundColor(getResources().getColor(android.R.color.white))
-//                .show();
-
         final CharSequence[] items = {"百度翻译", "有道翻译", "谷歌翻译"};
-
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
@@ -333,29 +304,6 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
     }
 
     private void showAboutTxtTranslationDialog() {
-//        new MaterialDialog.Builder(getActivity())
-//                .content("文本翻译是一项测试功能，目前只支持TXT文本，比如filename.txt，暂不支持.doc等其它任何格式的文本。")
-//                .positiveText("选择文本")
-//                .negativeText("取消")
-//                .onPositive(new MaterialDialog.SingleButtonCallback() {
-//                    @Override
-//                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-//                        showFileChooser();
-//                        dialog.dismiss();
-//                    }
-//                })
-//                .onNegative(new MaterialDialog.SingleButtonCallback() {
-//                    @Override
-//                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-//                        dialog.dismiss();
-//                    }
-//                })
-//                .negativeColor(getResources().getColor(android.R.color.holo_red_dark))
-//                .positiveColor(getResources().getColor(android.R.color.holo_red_dark))
-//                .contentColor(getResources().getColor(android.R.color.darker_gray))
-//                .backgroundColor(getResources().getColor(android.R.color.white))
-//                .show();
-
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext, R.style.AppCompatAlertDialogStyle);
         builder.setMessage("文本翻译是一项测试功能，目前只支持TXT文本，比如filename.txt，暂不支持.doc等其它任何格式的文本。")
                 .setPositiveButton("选择文本", new DialogInterface.OnClickListener() {
@@ -412,20 +360,6 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
             }
             mInputTranslationText.setText(fileText);
         } else {
-//            new MaterialDialog.Builder(mContext)
-//                    .content("sorry~~~文本翻译目前只支持.txt文本格式.")
-//                    .positiveText("")
-//                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-//                        @Override
-//                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-//                            dialog.dismiss();
-//                        }
-//                    })
-//                    .positiveColor(getResources().getColor(android.R.color.holo_red_dark))
-//                    .contentColor(getResources().getColor(android.R.color.darker_gray))
-//                    .backgroundColor(getResources().getColor(android.R.color.white))
-//                    .show();
-
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext, R.style.AppCompatAlertDialogStyle);
             builder.setMessage("sorry~~~文本翻译目前只支持.txt文本格式.")
                     .setPositiveButton("好的", new DialogInterface.OnClickListener() {
@@ -530,6 +464,12 @@ public class TabTranslationFragment extends Fragment implements View.OnClickList
     @Override
     public void onStop() {
         super.onStop();
+        mPlayAudio.killTTS();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         mPlayAudio.killTTS();
     }
 }

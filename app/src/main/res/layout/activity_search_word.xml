@@ -32,9 +32,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:singleLine="true"
+                android:lines="1"
                 android:background="@drawable/bg_search_word_rounded"
                 android:hint="@string/input_word_hint"
+                android:imeOptions="actionSearch"
                 android:textColor="@color/app_color"
                 android:textCursorDrawable="@null" />
 

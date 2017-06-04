@@ -269,7 +269,7 @@ public class ReaderFragment extends BaseFragment {
         headers.put(AppConstants.CONTENT_TYPE, AppConstants.CONTENT_TYPE_VALUE);
         headers.put(AppConstants.X_LC_Id, AppConstants.X_LC_ID_VALUE);
         headers.put(AppConstants.X_LC_Key, AppConstants.X_LC_KEY_VALUE);
-        VolleySingleton.getInstance(mContext)
+        VolleySingleton.getInstance()
                 .addToRequestQueue(new GsonRequest<>("https://leancloud.cn:443/1.1/classes/" + object + "?where={\"postTime\":{\"$lte\":{\"__type\":\"Date\",\"iso\":\"" + date + "\"}}}&limit=" + limit + "&skip=" + skip + "&order=-postTime"
                         , type, headers, new Response.Listener<T>() {
                     @Override

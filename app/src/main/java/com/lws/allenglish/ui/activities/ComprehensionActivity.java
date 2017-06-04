@@ -151,7 +151,7 @@ public class ComprehensionActivity extends AppCompatActivity {
         headers.put(AppConstants.CONTENT_TYPE, AppConstants.CONTENT_TYPE_VALUE);
         headers.put(AppConstants.X_LC_Id, AppConstants.X_LC_ID_VALUE);
         headers.put(AppConstants.X_LC_Key, AppConstants.X_LC_KEY_VALUE);
-        VolleySingleton.getInstance(mContext)
+        VolleySingleton.getInstance()
                 .addToRequestQueue(new GsonRequest<>("https://leancloud.cn:443/1.1/classes/Comprehension?where={\"postTime\":{\"$lte\":{\"__type\":\"Date\",\"iso\":\"" + date + "\"}}}&limit=" + limit + "&skip=" + skip + "&order=-postTime"
                         , Comprehension.class, headers, new Response.Listener<Comprehension>() {
                     @Override

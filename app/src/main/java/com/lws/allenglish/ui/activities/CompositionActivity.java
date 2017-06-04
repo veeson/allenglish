@@ -2,12 +2,12 @@ package com.lws.allenglish.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,8 +20,6 @@ import com.lws.allenglish.AppConstants;
 import com.lws.allenglish.R;
 import com.lws.allenglish.adapter.ReaderAdapter;
 import com.lws.allenglish.base.BaseApplication;
-import com.lws.allenglish.bean.BaseEnglish;
-import com.lws.allenglish.bean.Comprehension;
 import com.lws.allenglish.bean.Reader;
 import com.lws.allenglish.connector.OnItemClickListener;
 import com.lws.allenglish.utils.GsonRequest;
@@ -153,7 +151,7 @@ public class CompositionActivity extends AppCompatActivity {
         headers.put(AppConstants.CONTENT_TYPE, AppConstants.CONTENT_TYPE_VALUE);
         headers.put(AppConstants.X_LC_Id, AppConstants.X_LC_ID_VALUE);
         headers.put(AppConstants.X_LC_Key, AppConstants.X_LC_KEY_VALUE);
-        VolleySingleton.getInstance(mContext)
+        VolleySingleton.getInstance()
                 .addToRequestQueue(new GsonRequest<>("https://leancloud.cn:443/1.1/classes/Composition?where={\"postTime\":{\"$lte\":{\"__type\":\"Date\",\"iso\":\"" + date + "\"}}}&limit=" + limit + "&skip=" + skip + "&order=-postTime"
                         , Reader.class, headers, new Response.Listener<Reader>() {
                     @Override

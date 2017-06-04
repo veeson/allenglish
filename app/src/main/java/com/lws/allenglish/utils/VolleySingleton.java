@@ -1,6 +1,5 @@
 package com.lws.allenglish.utils;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.LruCache;
 
@@ -8,15 +7,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.lws.allenglish.base.BaseApplication;
 
 public class VolleySingleton {
     private static VolleySingleton mInstance;
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
-    private static Context mCtx;
 
-    private VolleySingleton(Context context) {
-        mCtx = context;
+    private VolleySingleton() {
         mRequestQueue = getRequestQueue();
 
         mImageLoader = new ImageLoader(mRequestQueue,
@@ -36,9 +34,9 @@ public class VolleySingleton {
                 });
     }
 
-    public static synchronized VolleySingleton getInstance(Context context) {
+    public static synchronized VolleySingleton getInstance() {
         if (mInstance == null) {
-            mInstance = new VolleySingleton(context);
+            mInstance = new VolleySingleton();
         }
         return mInstance;
     }
@@ -47,7 +45,7 @@ public class VolleySingleton {
         if (mRequestQueue == null) {
             // getApplicationContext() is key, it keeps you from leaking the
             // Activity or BroadcastReceiver if someone passes one in.
-            mRequestQueue = Volley.newRequestQueue(mCtx.getApplicationContext());
+            mRequestQueue = Volley.newRequestQueue(BaseApplication.getInstance());
         }
         return mRequestQueue;
     }
