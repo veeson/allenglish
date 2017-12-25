@@ -16,10 +16,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Wilson on 2016/12/8.
- */
-
 public class BaseWordAdapter extends RecyclerView.Adapter<BaseWordAdapter.ViewHolder> {
     private List<BaseWord> mList;
     private OnItemClickListener mOnItemClickListener;
@@ -58,7 +54,7 @@ public class BaseWordAdapter extends RecyclerView.Adapter<BaseWordAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.word)
+        @BindView(R.id.voa_english)
         TextView word;
         @BindView(R.id.base_explain)
         TextView baseExplain;

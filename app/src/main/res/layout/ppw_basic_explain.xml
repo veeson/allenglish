@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E0F2F1"
+    android:orientation="vertical"
+    android:padding="@dimen/dp6">
+
+    <LinearLayout
+        android:id="@+id/sound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/bg_close_button"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/word"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/dp6"
+            android:layout_weight="1"
+            android:textColor="@color/app_color"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp12"
+            android:layout_marginEnd="@dimen/dp12"
+            android:src="@drawable/ic_action_volume_up_color" />
+
+        <ImageView
+            android:id="@+id/collection"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_collection_selector" />
+    </LinearLayout>
+
+    <View style="@style/HorizontalDivider" />
+
+    <TextView
+        android:id="@+id/symbols"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp6"
+        android:layout_marginTop="@dimen/dp6"
+        android:lineSpacingMultiplier="1.2"
+        android:text="adj.好的, 优秀的, 有益的, 漂亮的，健全的
+n.好处，利益, 善良, 善行, 好人
+adv.同well"
+        android:textSize="18sp" />
+
+    <View style="@style/HorizontalDivider" />
+
+    <ImageButton
+        android:id="@+id/close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_close_button"
+        android:padding="@dimen/dp6"
+        android:src="@drawable/ic_action_fork" />
+
+</LinearLayout>

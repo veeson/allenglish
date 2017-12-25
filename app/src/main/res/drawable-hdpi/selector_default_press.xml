@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@color/press_grey" android:state_pressed="true" />
-    <item android:drawable="@color/press_grey" android:state_selected="true" />
-    <item android:drawable="@color/press_white" />
+    <item android:drawable="@drawable/rectangle_shape_press" android:state_pressed="true" />
+    <item android:drawable="@drawable/rectangle_shape_press" android:state_selected="true" />
+    <item android:drawable="@drawable/rectangle_shape_default" />
 </selector>

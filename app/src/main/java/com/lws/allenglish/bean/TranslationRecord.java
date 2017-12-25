@@ -4,10 +4,6 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
-/**
- * Created by Wilson on 2016/12/16.
- */
-
 public class TranslationRecord implements Comparable<TranslationRecord>, Serializable {
     public String text;
     public String result;

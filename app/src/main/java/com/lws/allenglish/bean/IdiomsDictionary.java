@@ -2,10 +2,6 @@ package com.lws.allenglish.bean;
 
 import java.util.List;
 
-/**
- * Created by Wilson on 2016/12/28.
- */
-
 public class IdiomsDictionary {
 
     /**

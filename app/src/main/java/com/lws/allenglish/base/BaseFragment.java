@@ -1,53 +1,25 @@
 package com.lws.allenglish.base;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-/**
- * Created by Wilson on 2016/12/16.
- */
+import butterknife.Unbinder;
 
-public abstract class BaseFragment extends Fragment {
-    /**
-     * Fragment当前状态是否可见
-     */
-    protected boolean mIsVisible;
-    /**
-     * 标志位，标志已经初始化完成
-     */
-    protected boolean mIsPrepared = false;
-    /**
-     * 是否已被加载过一次，第二次就不再去请求数据了
-     */
-    protected boolean mHasLoadedOnce = false;
+public class BaseFragment extends Fragment {
+    protected Context mContext;
+    protected Unbinder unbinder;
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (getUserVisibleHint()) {
-            mIsVisible = true;
-            onVisible();
-        } else {
-            mIsVisible = false;
-            onInvisible();
-        }
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mContext = getActivity();
     }
 
-    /**
-     * 可见
-     */
-    protected void onVisible() {
-        lazyLoad();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
-
-    /**
-     * 不可见
-     */
-    protected void onInvisible() {
-    }
-
-    /**
-     * 延迟加载
-     * 子类必须重写此方法
-     */
-    protected abstract void lazyLoad();
 }

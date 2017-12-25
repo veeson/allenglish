@@ -16,10 +16,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Wilson on 2016/12/16.
- */
-
 public class TranslationRecordAdapter extends RecyclerView.Adapter<TranslationRecordAdapter.ViewHolder> {
     private List<TranslationRecord> mList;
     private OnItemClickListener mOnItemClickListener;

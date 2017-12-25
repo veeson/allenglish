@@ -4,10 +4,6 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
-/**
- * Created by Wilson on 2016/12/8.
- */
-
 public class BaseWord implements Comparable<BaseWord>, Serializable {
     public String word;
     public String ph_en;

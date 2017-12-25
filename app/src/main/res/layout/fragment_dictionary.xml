@@ -17,7 +17,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/word"
+                android:id="@+id/voa_english"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -69,12 +69,16 @@
             android:src="@drawable/ic_action_share" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/dictionary_detail"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp6"
-        android:lineSpacingMultiplier="1.2"
-        android:textSize="@dimen/sp16" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/dictionary_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp6"
+            android:lineSpacingMultiplier="1.2"
+            android:textSize="@dimen/sp16" />
+    </ScrollView>
 
 </LinearLayout>

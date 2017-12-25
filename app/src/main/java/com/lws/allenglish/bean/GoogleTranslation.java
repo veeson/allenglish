@@ -2,11 +2,7 @@ package com.lws.allenglish.bean;
 
 import java.util.List;
 
-/**
- * Created by Wilson on 2016/12/15.
- */
-
-public class GoogleTranslation extends BaseTranslation {
+public class GoogleTranslation {
 
     /**
      * sentences : [{"trans":"Hello Google","orig":"谷歌你好","backend":3}]

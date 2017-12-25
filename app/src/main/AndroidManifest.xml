@@ -6,16 +6,46 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
         android:name=".base.BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- 讯飞广告配置 -->
+        <meta-data
+            android:name="IFLYTEK_APPKEY_AD"
+            android:value="58611aa9" />
+
+        <service android:name="com.iflytek.voiceads.update.DownloadService" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.lws.allenglish.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name="com.iflytek.voiceads.request.IFLYBrowser"
+            android:screenOrientation="portrait" />
+        <!-- 讯飞广告配置 -->
+
+        <activity
+            android:name=".controller.activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
@@ -26,53 +56,47 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.SearchWordActivity"
-            android:launchMode="singleTask" />
+            android:name=".controller.activities.SearchWordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.WordDetailsActivity"
+            android:name=".controller.activities.WordDetailsActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.BlankActivity"
+            android:name=".controller.activities.BlankActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.BookmarkActivity"
+            android:name=".controller.activities.BookmarkActivity"
             android:label="@string/bookmark"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.TranslationRecordDetailsActivity"
-            android:label="@string/text_and_result" />
+            android:name=".controller.activities.TranslationRecordDetailsActivity"
+            android:label="@string/text_and_result"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.LeaningEnglishActivity"
-            android:label="@string/learning_english" />
-        <activity
-            android:name=".ui.activities.ReaderActivity"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".ui.activities.VOAActivity"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".ui.activities.VideoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:name=".controller.activities.AudioActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="sensor"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.ComprehensionEnglishActivity"
-            android:launchMode="singleTop" />
+            android:name=".controller.activities.DictionaryActivity"
+            android:label="@string/dictionary"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.ComprehensionActivity"
-            android:label="@string/comprehension" />
+            android:name=".controller.activities.VideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label=""
+            android:launchMode="singleTask" />
         <activity
-            android:name=".ui.activities.CompositionActivity"
-            android:label="@string/composition" />
+            android:name=".controller.activities.LearningListActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.WordActivity"
-            android:label="@string/word" />
-        <activity
-            android:name=".ui.activities.DictionaryActivity"
-            android:label="@string/dictionary" />
+            android:name=".controller.activities.ReaderActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".controller.activities.AboutActivity"
+            android:label="@string/app_about"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

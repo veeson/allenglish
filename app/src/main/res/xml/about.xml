@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/app_name">
+        <Preference
+            android:key="about_app"
+            android:summary="这是一款功能全面实用的中英词典应用，提供丰富的在线查词结果，离线状态下也可查询单词的音标和基本释义，支持有道、百度和谷歌在线翻译，支持TXT文本翻译（beta），能阅读各种类型中英双语阅读材料，还能学VOA英语和看视频学习英语，全面提升您的英语水平，还有字典词典、书签等更多实用功能。"
+            android:title="关于应用" />
+        <Preference
+            android:key="version_update"
+            android:summary="当前版本：VERSION-1.1"
+            android:title="检测更新" />
+        <Preference
+            android:key="send_to"
+            android:summary="如果您喜欢这个应用，不妨也分享给好友。"
+            android:title="分享" />
+        <Preference
+            android:key="contact_author"
+            android:summary="如果您有任何的意见建议，欢迎给我发邮件（weishengliu@foxmail.com）"
+            android:title="联系作者" />
+        <Preference
+            android:key="data_sources"
+            android:summary="App数据来源于网络，如有侵权，请与我联系。"
+            android:title="关于数据来源声明" />
+        <Preference
+            android:key="open_libs"
+            android:summary="volley、gson、butterknife、jiecaovideoplayer"
+            android:title="App使用的一些开源库" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

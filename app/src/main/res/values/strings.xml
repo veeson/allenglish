@@ -1,43 +1,14 @@
 <resources>
-    <string name="app_name">全能英语</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">全能词典</string>
     <string name="app_about">关于软件</string>
-    <string name="app_praise">给个好评</string>
     <string name="bookmark">书签</string>
-    <string name="daily_sentence">每日一句</string>
-    <string name="add_new_word">加入生词</string>
-    <string name="open_bookmark">打开书签</string>
-    <string name="translation">翻译</string>
-    <string name="article">文章</string>
     <string name="search">搜索</string>
     <string name="copy">复制</string>
-    <string name="input_tip">请输入要查询单词</string>
-    <string name="reading">阅读</string>
-    <string name="voa_english">VOA英语</string>
     <string name="input_word_hint">输入要查询的英文单词</string>
     <string name="input_translation_text_tip">在此输入要翻译的文本</string>
     <string name="error_translation">翻译出现异常，请切换至其它翻译引擎或稍后再试。</string>
     <string name="bad_internet">当前网络异常，请检查网络设置。</string>
-    <string name="input_text_tip">请输入要翻译的文本</string>
     <string name="black_text">空文本</string>
-    <string name="long_text_tip">你要翻译的文字实在太长了，分成几段再试吧。</string>
     <string name="text_and_result">原文与译文</string>
-    <string name="error_loading">加载失败，请检查网络设置或稍后重试。</string>
-    <string name="learning_english">学英语</string>
-    <string name="oo_oo">00:00</string>
-    <string name="comprehension">听力学习</string>
-    <string name="composition">作文学习</string>
-    <string name="word">单词学习</string>
     <string name="dictionary">字典词典</string>
-
-    <string-array name="trans_source_array">
-        <item>百度翻译</item>
-        <item>有道翻译</item>
-        <item>谷歌翻译</item>
-    </string-array>
-
-    <string-array name="delete_option">
-        <item>删除当前项</item>
-        <item>删除所有项</item>
-    </string-array>
 </resources>

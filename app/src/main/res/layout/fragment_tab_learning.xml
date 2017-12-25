@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/learning_english"
+        android:id="@+id/bilingual_reading"
         style="@style/DefaultClickable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,12 +15,12 @@
         android:drawablePadding="@dimen/dp12"
         android:gravity="center_vertical"
         android:padding="@dimen/dp3"
-        android:text="@string/learning_english"
-        android:textColor="#424242"
+        android:text="双语阅读"
+        android:textColor="@android:color/secondary_text_light"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/word"
+        android:id="@+id/voa_english"
         style="@style/DefaultClickable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,36 +29,22 @@
         android:drawablePadding="@dimen/dp12"
         android:gravity="center_vertical"
         android:padding="@dimen/dp3"
-        android:text="单词学习"
-        android:textColor="#424242"
+        android:text="VOA英语"
+        android:textColor="@android:color/secondary_text_light"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/composition"
+        android:id="@+id/english_video_learning"
         style="@style/DefaultClickable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp6"
-        android:drawableLeft="@drawable/ic_composition"
+        android:drawableLeft="@drawable/ic_videos"
         android:drawablePadding="@dimen/dp12"
         android:gravity="center_vertical"
         android:padding="@dimen/dp3"
-        android:text="作文学习"
-        android:textColor="#424242"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/comprehension"
-        style="@style/DefaultClickable"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp6"
-        android:drawableLeft="@drawable/ic_comprehension"
-        android:drawablePadding="@dimen/dp12"
-        android:gravity="center_vertical"
-        android:padding="@dimen/dp3"
-        android:text="听力学习"
-        android:textColor="#424242"
+        android:text="看视频学英语"
+        android:textColor="@android:color/secondary_text_light"
         android:textSize="18sp" />
 
     <TextView
@@ -72,7 +58,7 @@
         android:gravity="center_vertical"
         android:padding="@dimen/dp3"
         android:text="@string/bookmark"
-        android:textColor="#424242"
+        android:textColor="@android:color/secondary_text_light"
         android:textSize="18sp" />
 
     <TextView
@@ -86,7 +72,21 @@
         android:gravity="center_vertical"
         android:padding="@dimen/dp3"
         android:text="字典词典"
-        android:textColor="#424242"
+        android:textColor="@android:color/secondary_text_light"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/about"
+        style="@style/DefaultClickable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp6"
+        android:drawableLeft="@drawable/ic_about"
+        android:drawablePadding="@dimen/dp12"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dp3"
+        android:text="关于软件"
+        android:textColor="@android:color/secondary_text_light"
         android:textSize="18sp" />
 
 </LinearLayout>

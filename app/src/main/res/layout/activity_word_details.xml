@@ -47,7 +47,7 @@
             android:paddingRight="@dimen/dp12">
 
             <TextView
-                android:id="@+id/word"
+                android:id="@+id/voa_english"
                 style="@style/IconDefaultClickable"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

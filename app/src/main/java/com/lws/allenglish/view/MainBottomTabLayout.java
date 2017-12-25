@@ -33,7 +33,6 @@ public class MainBottomTabLayout extends LinearLayout {
         {R.drawable.ic_tab_lookup_dictionary_normal, R.drawable.ic_tab_lookup_dictionary_selected},
         {R.drawable.ic_tab_translation_normal, R.drawable.ic_tab_translation_selected},
         {R.drawable.ic_tab_learning_normal, R.drawable.ic_tab_learning_selected},
-        {R.drawable.ic_tab_me_normal, R.drawable.ic_tab_me_selected}
     };
 
     private View[] mIconLayouts;

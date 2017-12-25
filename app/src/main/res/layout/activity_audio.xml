@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_toolbar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp12"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/a_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp12"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:textSize="@dimen/sp26" />
+
+                <View style="@style/HorizontalDivider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:background="@drawable/bg_player_layout"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dp6">
+
+                    <ImageView
+                        android:id="@+id/player_control"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/selector_player" />
+
+                    <SeekBar
+                        android:id="@+id/audio_seek_bar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/position"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00:00"
+                        android:textColor="@color/app_color" />
+                </LinearLayout>
+
+                <com.lws.allenglish.view.GetWordTextView
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:lineSpacingMultiplier="1.1"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <include layout="@layout/common_article_bottom_layout" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

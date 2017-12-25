@@ -8,23 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.iflytek.voiceads.NativeADDataRef;
 import com.lws.allenglish.R;
+import com.lws.allenglish.base.BaseApplication;
 import com.lws.allenglish.bean.DetailedWord;
 import com.lws.allenglish.connector.OnFinishPlayAudioListener;
-import com.lws.allenglish.utils.PlayAudio;
-import com.lws.allenglish.view.CommonExplains;
+import com.lws.allenglish.util.CommonUtils;
+import com.lws.allenglish.util.PlayAudio;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-/**
- * Created by Wilson on 2016/12/10.
- */
 
 public class WordDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements OnFinishPlayAudioListener {
     private final static int TYPE_ONE = 0;
@@ -39,6 +38,8 @@ public class WordDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private Context mContext;
     private List<AnimationDrawable> mSentenceHornAnimations = new ArrayList<>();
 
+    private LinearLayout adLinearLayout;
+
     public WordDetailsAdapter(DetailedWord mDetailedWord, Context mContext, PlayAudio mPlayAudio, List<AnimationDrawable> mSentenceHornAnimations) {
         this.mDetailedWord = mDetailedWord;
         this.mContext = mContext;
@@ -50,13 +51,13 @@ public class WordDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
-            case TYPE_ONE:
+            case TYPE_ONE: // 基本释义
                 return new BaseInfoViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_sub_explain, parent, false));
-            case TYPE_TWE:
+            case TYPE_TWE: // 例句
                 return new ExampleSentenceViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_sub_explain, parent, false));
-            case TYPE_THESE:
+            case TYPE_THESE: // 短语
                 return new PhraseViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_sub_explain, parent, false));
-            case TYPE_FOUR:
+            case TYPE_FOUR: // 英英释义
                 return new EEMeanViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_sub_explain, parent, false));
         }
         return null;
@@ -114,50 +115,122 @@ public class WordDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return itemCount;
     }
 
+    private void setRecyclerViewContent(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BaseApplication.getInstance()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
+    }
+
     /**
      * 单词基本释义ViewHolder
      */
     public class BaseInfoViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.sub_explain)
-        CommonExplains commonExplains;
+        @BindView(R.id.explain_head)
+        TextView explainHead;
+        @BindView(R.id.sentence)
+        RecyclerView sentence;
+        @BindView(R.id.divider)
+        View divider;
 
         public BaseInfoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            commonExplains.setExplainHeadText("基本释义");
-            commonExplains.setSentenceRecyclerViewVisibility(View.GONE);
+            explainHead.setVisibility(View.GONE);
+            divider.setVisibility(View.GONE);
         }
 
         public void loadData() {
-            commonExplains.setSymbolsText(mDetailedWord.baseWord.means);
-            if (mDetailedWord.baesInfo != null) {
-                String word_er;
-                String word_est;
-                String word_pl;
-                StringBuilder sb = new StringBuilder();
-                try {
-                    word_er = mDetailedWord.baesInfo.exchange.word_er.get(0);
-                    sb.append("比较级: ").append(word_er);
-                } catch (Exception ignored) {
-                }
-                try {
-                    word_est = mDetailedWord.baesInfo.exchange.word_est.get(0);
-                    sb.append("最高级: ").append(word_est);
-                } catch (Exception ignored) {
-                }
-                try {
-                    word_pl = mDetailedWord.baesInfo.exchange.word_pl.get(0);
-                    sb.append("复数: ").append(word_pl);
-                } catch (Exception ignored) {
-                }
-                if (sb.length() > 0) {
-                    commonExplains.setExchangeText(sb);
-                } else {
-                    commonExplains.setExchangeVisibility(View.GONE);
-                }
-            } else {
-                commonExplains.setExchangeVisibility(View.GONE);
+            setRecyclerViewContent(sentence, new BaseInfoAdapter());
+        }
+
+        class BaseInfoAdapter extends RecyclerView.Adapter<BaseInfoAdapter.ViewHolder> {
+            @Override
+            public BaseInfoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sentence, parent, false);
+                return new BaseInfoAdapter.ViewHolder(v);
             }
+
+            @Override
+            public void onBindViewHolder(BaseInfoAdapter.ViewHolder holder, int position) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(mDetailedWord.baseWord.means);
+                if (mDetailedWord.baesInfo != null) {
+                    String word_er;
+                    String word_est;
+                    String word_pl;
+                    StringBuilder subSb = new StringBuilder();
+                    try {
+                        word_er = mDetailedWord.baesInfo.exchange.word_er.get(0);
+                        subSb.append("比较级: ").append(word_er).append(" ");
+                    } catch (Exception ignored) {
+                    }
+                    try {
+                        word_est = mDetailedWord.baesInfo.exchange.word_est.get(0);
+                        subSb.append("最高级: ").append(word_est).append(" ");
+                    } catch (Exception ignored) {
+                    }
+                    try {
+                        word_pl = mDetailedWord.baesInfo.exchange.word_pl.get(0);
+                        subSb.append("复数: ").append(word_pl).append(" ");
+                    } catch (Exception ignored) {
+                    }
+                    if (subSb.length() > 0) {
+                        sb.append("\n").append(subSb);
+                    }
+                }
+                holder.sentenceContent.setText(sb);
+
+                handleAds(holder);
+            }
+
+            private void handleAds(BaseInfoAdapter.ViewHolder holder) {
+                if (mDetailedWord.iflyNativeAd != null && mDetailedWord.nativeADDataRef != null) {
+                    holder.view.setVisibility(View.VISIBLE);
+                    holder.linearLayout.setVisibility(View.VISIBLE);
+                    CommonUtils.setUrlImageToImageView(holder.adsPicture, mDetailedWord.nativeADDataRef.getImage());
+                    holder.adsTitle.setText(mDetailedWord.nativeADDataRef.getTitle());
+                    CommonUtils.setAds(holder.linearLayout, mDetailedWord.iflyNativeAd, mDetailedWord.nativeADDataRef);
+                    adLinearLayout = holder.linearLayout;
+                }
+            }
+
+            @Override
+            public int getItemCount() {
+                return 1;
+            }
+
+            class ViewHolder extends RecyclerView.ViewHolder {
+                @BindView(R.id.sentence_content)
+                TextView sentenceContent;
+                @BindView(R.id.horn)
+                ImageView horn;
+                @BindView(R.id.view)
+                View view;
+                @BindView(R.id.linear_layout)
+                LinearLayout linearLayout;
+                @BindView(R.id.ads_picture)
+                ImageView adsPicture;
+                @BindView(R.id.ads_title)
+                TextView adsTitle;
+
+                public ViewHolder(View itemView) {
+                    super(itemView);
+                    ButterKnife.bind(this, itemView);
+                    horn.setVisibility(View.INVISIBLE);
+                }
+            }
+        }
+    }
+
+    public void exposureAd(NativeADDataRef nativeADDataRef) {
+        if (!nativeADDataRef.isExposured() && adLinearLayout != null) {
+            nativeADDataRef.onExposured(adLinearLayout);
         }
     }
 
@@ -165,29 +238,19 @@ public class WordDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
      * 例句ViewHolder
      */
     public class ExampleSentenceViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.sub_explain)
-        CommonExplains commonExplains;
-
-        private RecyclerView sentenceRecyclerView;
+        @BindView(R.id.explain_head)
+        TextView explainHead;
+        @BindView(R.id.sentence)
+        RecyclerView sentence;
 
         public ExampleSentenceViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            sentenceRecyclerView = commonExplains.getSentenceRecyclerView();
-            commonExplains.setExplainHeadText("双语例句");
-            commonExplains.setBaseInfoLinearLayoutVisibility(View.GONE);
+            explainHead.setText("双语例句");
         }
 
         public void loadData() {
-            sentenceRecyclerView.setHasFixedSize(true);
-            LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext) {
-                @Override
-                public boolean canScrollVertically() {
-                    return false;
-                }
-            };
-            sentenceRecyclerView.setLayoutManager(mLayoutManager);
-            sentenceRecyclerView.setAdapter(new ExampleSentenceContentAdapter());
+            setRecyclerViewContent(sentence, new ExampleSentenceContentAdapter());
         }
 
         public class ExampleSentenceContentAdapter extends RecyclerView.Adapter<ExampleSentenceContentAdapter.ViewHolder> {
@@ -218,7 +281,7 @@ public class WordDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         }
                         stopAnimation();
                         mSentenceHornAnimations.get(pos + 2).start();
-                        mPlayAudio.play(mContext, mDetailedWord.sentence.get(pos).tts_mp3, 3);
+                        mPlayAudio.play(BaseApplication.getInstance(), mDetailedWord.sentence.get(pos).tts_mp3, 3);
                     }
                 });
             }
@@ -247,7 +310,7 @@ public class WordDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         stopAnimation();
     }
 
-    public void stopAnimation(){
+    public void stopAnimation() {
         for (AnimationDrawable animation :
                 mSentenceHornAnimations) {
             if (animation.isRunning()) {
@@ -261,29 +324,19 @@ public class WordDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
      * 词组ViewHolder
      */
     public class PhraseViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.sub_explain)
-        CommonExplains commonExplains;
-
-        private RecyclerView sentenceRecyclerView;
+        @BindView(R.id.explain_head)
+        TextView explainHead;
+        @BindView(R.id.sentence)
+        RecyclerView sentence;
 
         public PhraseViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            sentenceRecyclerView = commonExplains.getSentenceRecyclerView();
-            commonExplains.setExplainHeadText("词组搭配");
-            commonExplains.setBaseInfoLinearLayoutVisibility(View.GONE);
+            explainHead.setText("词组搭配");
         }
 
         public void loadData() {
-            sentenceRecyclerView.setHasFixedSize(true);
-            LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext) {
-                @Override
-                public boolean canScrollVertically() {
-                    return false;
-                }
-            };
-            sentenceRecyclerView.setLayoutManager(mLayoutManager);
-            sentenceRecyclerView.setAdapter(new PhraseViewHolder.PhraseContentAdapter());
+            setRecyclerViewContent(sentence, new PhraseViewHolder.PhraseContentAdapter());
         }
 
         class PhraseContentAdapter extends RecyclerView.Adapter<PhraseContentAdapter.ViewHolder> {
@@ -335,29 +388,19 @@ public class WordDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
      * 英英释义ViewHolder
      */
     public class EEMeanViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.sub_explain)
-        CommonExplains commonExplains;
-
-        private RecyclerView sentenceRecyclerView;
+        @BindView(R.id.explain_head)
+        TextView explainHead;
+        @BindView(R.id.sentence)
+        RecyclerView sentence;
 
         public EEMeanViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            sentenceRecyclerView = commonExplains.getSentenceRecyclerView();
-            commonExplains.setExplainHeadText("英英释义");
-            commonExplains.setBaseInfoLinearLayoutVisibility(View.GONE);
+            explainHead.setText("英英释义");
         }
 
         public void loadData() {
-            sentenceRecyclerView.setHasFixedSize(true);
-            LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext) {
-                @Override
-                public boolean canScrollVertically() {
-                    return false;
-                }
-            };
-            sentenceRecyclerView.setLayoutManager(mLayoutManager);
-            sentenceRecyclerView.setAdapter(new EEMeanContentAdapter());
+            setRecyclerViewContent(sentence, new EEMeanContentAdapter());
         }
 
         class EEMeanContentAdapter extends RecyclerView.Adapter<EEMeanContentAdapter.ViewHolder> {
@@ -372,9 +415,9 @@ public class WordDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 StringBuilder sb = new StringBuilder();
                 try {
                     sb.append(mDetailedWord.ee_mean.get(position).part_name).append("\n");
-                    for (DetailedWord.EeMeanEntity.MeansEntityXX xx : mDetailedWord.ee_mean.get(position).means) {
+                    for (DetailedWord.EeMeanEntity.MeansEntity xx : mDetailedWord.ee_mean.get(position).means) {
                         sb.append(xx.word_mean).append("\n");
-                        for (DetailedWord.EeMeanEntity.MeansEntityXX.SentencesEntity sentences : xx.sentences) {
+                        for (DetailedWord.EeMeanEntity.MeansEntity.SentencesEntity sentences : xx.sentences) {
                             sb.append(sentences.sentence).append("\n");
                         }
                     }

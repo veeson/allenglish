@@ -2,11 +2,7 @@ package com.lws.allenglish.bean;
 
 import java.util.List;
 
-/**
- * Created by Wilson on 2016/12/15.
- */
-
-public class YoudaoTranslation extends BaseTranslation {
+public class YoudaoTranslation {
 
     /**
      * translation : ["好"]
